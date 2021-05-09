@@ -103,7 +103,7 @@ defmodule AdyenCheckoutEx.Model.PaymentRequest do
     :"order" => AdyenCheckoutEx.Model.CheckoutOrder.t | nil,
     :"orderReference" => String.t | nil,
     :"origin" => String.t | nil,
-    :"paymentMethod" => OneOfAchDetailsAfterpayDetailsAmazonPayDetailsAndroidPayDetailsApplePayDetailsBacsDirectDebitDetailsBillDeskDetailsBlikDetailsCardDetailsCellulantDetailsDokuDetailsDotpayDetailsDragonpayDetailsEcontextVoucherDetailsEntercashDetailsGenericIssuerPaymentMethodDetailsGiropayDetailsGooglePayDetailsIdealDetailsKlarnaDetailsLianLianPayDetailsMasterpassDetailsMbwayDetailsMobilePayDetailsMolPayDetailsOpenInvoiceDetailsPayPalDetailsPayUUpiDetailsPaymentDetailsQiwiWalletDetailsRatepayDetailsSamsungPayDetailsSepaDirectDebitDetailsStoredPaymentMethodDetailsUpiDetailsVippsDetailsVisaCheckoutDetailsWeChatPayDetailsWeChatPayMiniProgramDetailsZipDetails,
+    :"paymentMethod" => PaymentMethodDetails,
     :"recurringExpiry" => String.t | nil,
     :"recurringFrequency" => String.t | nil,
     :"recurringProcessingModel" => String.t | nil,
@@ -149,7 +149,7 @@ defimpl Poison.Decoder, for: AdyenCheckoutEx.Model.PaymentRequest do
     |> deserialize(:"merchantRiskIndicator", :struct, AdyenCheckoutEx.Model.MerchantRiskIndicator, options)
     |> deserialize(:"mpiData", :struct, AdyenCheckoutEx.Model.ThreeDSecureData, options)
     |> deserialize(:"order", :struct, AdyenCheckoutEx.Model.CheckoutOrder, options)
-    |> deserialize(:"paymentMethod", :struct, AdyenCheckoutEx.Model.OneOfAchDetailsAfterpayDetailsAmazonPayDetailsAndroidPayDetailsApplePayDetailsBacsDirectDebitDetailsBillDeskDetailsBlikDetailsCardDetailsCellulantDetailsDokuDetailsDotpayDetailsDragonpayDetailsEcontextVoucherDetailsEntercashDetailsGenericIssuerPaymentMethodDetailsGiropayDetailsGooglePayDetailsIdealDetailsKlarnaDetailsLianLianPayDetailsMasterpassDetailsMbwayDetailsMobilePayDetailsMolPayDetailsOpenInvoiceDetailsPayPalDetailsPayUUpiDetailsPaymentDetailsQiwiWalletDetailsRatepayDetailsSamsungPayDetailsSepaDirectDebitDetailsStoredPaymentMethodDetailsUpiDetailsVippsDetailsVisaCheckoutDetailsWeChatPayDetailsWeChatPayMiniProgramDetailsZipDetails, options)
+    |> deserialize(:"paymentMethod", :struct, AdyenCheckoutEx.Model.PaymentMethodDetails, options)
     |> deserialize(:"riskData", :struct, AdyenCheckoutEx.Model.RiskData, options)
     |> deserialize(:"shopperName", :struct, AdyenCheckoutEx.Model.Name, options)
     |> deserialize(:"splits", :list, AdyenCheckoutEx.Model.Split, options)

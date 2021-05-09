@@ -9,38 +9,29 @@ defmodule AdyenCheckoutEx.Connection do
 
   use Tesla
 
-  # Add any middleware here (authentication)
-  plug Tesla.Middleware.BaseUrl, "https://checkout-test.adyen.com/v67"
-  plug Tesla.Middleware.Headers, [{"user-agent", "Elixir"}]
-  plug Tesla.Middleware.EncodeJson, engine: Poison
-
   @doc """
-  Configure a client connection using Basic authentication.
-
-  ## Parameters
-
-  - username (String): Username used for authentication
-  - password (String): Password used for authentication
+  Configure an authenticated client connection
 
   # Returns
 
   Tesla.Env.client
   """
   @spec new(String.t, String.t) :: Tesla.Env.client
-  def new(username, password) do
-    Tesla.client([
-      {Tesla.Middleware.BasicAuth, %{username: username, password: password}}
-    ])
-  end
-  @doc """
-  Configure an authless client connection
+  def new(api_key, opts \\ []) do
+    base_url = Keyword.get(opts, :base_url, "https://checkout-test.adyen.com/v67")
 
-  # Returns
+    headers = [
+      {"x-api-key", api_key},
+    ]
 
-  Tesla.Env.client
-  """
-  @spec new() :: Tesla.Env.client
-  def new do
-    Tesla.client([])
+    middleware = [
+      {Tesla.Middleware.BaseUrl, base_url},
+      {Tesla.Middleware.Logger, debug: false},
+      {Tesla.Middleware.Headers, headers},
+      {Tesla.Middleware.EncodeJson, engine: Poison},
+    ]
+
+    adapter = {Tesla.Adapter.Hackney, [recv_timeout: 30_000]}
+    Tesla.client(middleware, adapter)
   end
 end

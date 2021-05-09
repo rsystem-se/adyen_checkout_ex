@@ -31,7 +31,9 @@ defmodule AdyenCheckoutEx.Connection do
       {Tesla.Middleware.EncodeJson, engine: Poison},
     ]
 
-    adapter = {Tesla.Adapter.Hackney, [recv_timeout: 30_000]}
+    # information about "insecure: true"
+    # https://nts.strzibny.name/unknown-hackney-ca-error-otp-23/
+    adapter = {Tesla.Adapter.Hackney, [recv_timeout: 30_000, insecure: true]}
     Tesla.client(middleware, adapter)
   end
 end

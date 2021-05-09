@@ -1,13 +1,20 @@
 defmodule AdyenCheckoutEx.Mixfile do
   use Mix.Project
 
+  @version "0.4.2"
+  @github_url "https://github.com/rsystem-se/adyen_checkout_ex"
+
   def project do
-    [app: :adyen_checkout_ex,
-     version: "67",
-     elixir: "~> 1.6",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
+    [
+      app: :adyen_checkout_ex,
+      description: "AdyenCheckoutEx is an unofficial API client for Adyen Checkout",
+      version: @version,
+      elixir: "~> 1.6",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps(),
+      package: package(),
+    ]
   end
 
   # Configuration for the OTP application
@@ -29,8 +36,21 @@ defmodule AdyenCheckoutEx.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:tesla, "~> 1.2"},
-      {:poison, "~> 3.0"}
+      {:tesla, "~> 1.4"},
+      {:fuse, "~> 2.4"},
+      {:hackney, "~> 1.17"},
+      {:poison, "~> 3.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Nils Ivanson"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => @github_url
+      }
     ]
   end
 end

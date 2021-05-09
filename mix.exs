@@ -1,7 +1,7 @@
 defmodule AdyenCheckoutEx.Mixfile do
   use Mix.Project
 
-  @version "0.4.2"
+  @version "0.1.0"
   @github_url "https://github.com/rsystem-se/adyen_checkout_ex"
 
   def project do

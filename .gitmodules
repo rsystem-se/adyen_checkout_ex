@@ -1,0 +1,3 @@
+[submodule "adyen-openapi"]
+	path = adyen-openapi
+	url = git@github.com:Adyen/adyen-openapi.git
